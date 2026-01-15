@@ -1,111 +1,215 @@
-# 🎓 EduGuide - Plateforme d'Orientation Étudiante par IA
+# ReadME.final — Documentation Unifiée
 
-**EduGuide** est une plateforme moderne et intelligente conçue pour aider les étudiants à naviguer dans le paysage de l'enseignement supérieur français. Elle combine une base de données robuste d'établissements et de carrières avec **Eddy**, un assistant IA empathique propulsé par des LLMs locaux (Ollama).
-
----
-
-## 🚀 Fonctionnalités Clés
-
-### 🤖 Assistant d'Orientation IA (Eddy)
--   **Chat en Langage Naturel** : Posez des questions sur les écoles, les métiers ou obtenez des conseils d'orientation.
--   **RAG Contextuel** : Eddy utilise un système de "Génération Augmentée par la Récupération" (RAG) pour fournir des réponses précises basées sur nos données réelles.
--   **Accès Web** : Peut naviguer sur internet (de manière sécurisée) pour trouver des informations récentes absentes de la base de données.
--   **Sécurité** : Protégé contre les injections de prompt et les attaques SSRF.
-
-### 🏫 Explorateur d'Écoles & Carrières
--   **Recherche Intelligente** : Filtrez les écoles par ville, type (Ingénieur, Commerce, etc.) et domaine.
--   **Visualisation de Données** : Graphiques interactifs montrant les perspectives de carrière, les salaires et les statistiques des écoles.
--   **Comparateur** : Comparez les écoles côte à côte pour faire le meilleur choix.
-
-### 🛡️ Sécurisé & Évolutif
--   **Limitation de Débit (Rate Limiting)** : Protège l'API contre les abus.
--   **Protection CORS** : Limite strictement l'accès API au frontend officiel.
--   **Défenses SSRF** : Empêche l'IA d'accéder aux ressources réseaux internes.
+**Projet** : EduGuide — Plateforme d'Orientation Étudiante par IA
+**Date** : 15 Janvier 2026
+**Version** : 1.0.0
+**Auteurs** : Équipe EduGuide (Antigravity / Google DeepMind)
 
 ---
 
-## 🛠️ Stack Technique
+## 📚 Table des Matières
 
-### Frontend
--   **Framework** : React 18 + Vite
--   **Bibliothèque UI** : Tailwind CSS v4 + Radix UI + Shadcn/UI
--   **Visuels** : Recharts (Graphiques), Framer Motion (Animations), Lucide (Icônes)
-
-### Backend
--   **API** : FastAPI (Python 3.9+)
--   **Moteur IA** : Ollama (modèles locaux comme Gemma 2 ou Mistral)
--   **Outils** : BeautifulSoup4 (Scraping), Pydantic (Validation)
--   **Sécurité** : Middleware personnalisé pour le Rate Limiting & la Sanitization des entrées.
+1. Résumé Exécutif
+2. Fonctionnalités Clés
+3. Architecture Système
+4. Guide de Démarrage
+5. Détails Frontend
+6. Détails Backend
+7. Sécurité
+8. Gestion des Données
+9. Dépannage & FAQ
+10. Feuille de Route
+11. Licence & Contribution
 
 ---
 
-## ⚡ Pour Commencer
+## 1. Résumé Exécutif
 
-### Prérequis
-1.  **Node.js** (v18+) & **npm/pnpm**
-2.  **Python** (v3.9+)
-3.  **Ollama** : Installé et démarré.
-    -   Télécharger sur [ollama.com](https://ollama.com).
-    -   Télécharger le modèle : `ollama pull gemma2`.
+EduGuide est une plateforme intelligente destinée à aider les étudiants à naviguer dans l'enseignement supérieur français. Elle combine une base de données d'établissements, un agent conversationnel IA (Eddy) et des outils de recherche/scraping pour fournir des réponses personnalisées et contextualisées.
 
-### Installation
+Objectifs principaux : centralisation des données, personnalisation des conseils, transparence, et sécurité.
 
-1.  **Cloner le dépôt** :
-    ```bash
-    git clone https://github.com/votre-repo/eduguide.git
-    cd eduguide
-    ```
+---
 
-2.  **Installer les dépendances Frontend** :
-    ```bash
-    npm install
-    ```
+## 2. Fonctionnalités Clés
 
-3.  **Installer les dépendances Backend** :
-    ```bash
-    cd backend
-    pip install -r requirements.txt
-    cd ..
-    ```
+- Assistant d'orientation IA (Eddy) en français, capable de répondre en langage naturel.
+- Système RAG (Génération Augmentée par Récupération) pour lier raisonnement et données locales.
+- Exploration et filtrage d'écoles par ville, type et domaine.
+- Visualisations (salaires, débouchés) et comparateur d'établissements.
+- Défenses contre les injections de prompt, SSRF et limitation de débit.
 
-### 🏃‍♂️ Lancer la Plateforme
+---
 
-Nous fournissons un script pour tout démarrer en une fois :
+## 3. Architecture Système
+
+EduGuide adopte une architecture client-serveur découpée : Frontend (React + Vite) ↔ Backend (FastAPI) ↔ Agent IA (Eddy) ↔ Outils (scraper, base JSON) ↔ LLM local (Ollama).
+
+Diagramme (haut niveau) :
+
+```mermaid
+graph TD
+    User[Étudiant] -->|Interagit via Navigateur| FE[Frontend (React + Vite)]
+    FE -->|HTTP/REST| BE[Backend (FastAPI)]
+    subgraph "Couche Frontend"
+        FE --> UI[Composants Radix UI]
+        FE --> State[React State/Hooks]
+    end
+    subgraph "Couche Backend"
+        BE --> API[Routeur FastAPI]
+        API --> Agent[Agent IA (Eddy)]
+        API --> Services[Services de Données]
+        Agent -->|Inférence| Ollama[Ollama (LLM Local)]
+        Agent -->|RAG| Tools[Outils Agent]
+        Tools -->|Lecture| JSON[institutions.json]
+        Tools -->|Récupération| Web[Scraper Internet]
+    end
+```
+
+Flux simplifié : l'utilisateur envoie une question → Frontend envoie POST /api/v1/chat → Backend valide et appelle Agent → Agent peut appeler des outils → LLM (Ollama) produit la réponse → Backend renvoie au Frontend.
+
+---
+
+## 4. Guide de Démarrage
+
+### 4.1 Prérequis
+- Systèmes supportés : macOS 14+, Ubuntu 22.04+, Windows 11 (WSL2).
+- Node.js v18.17+ et npm/pnpm.
+- Python 3.9+.
+- Ollama installé et démarré (`ollama serve`) ; modèles locaux (ex: gemma2, mistral) téléchargés.
+
+### 4.2 Installation rapide
+
+```bash
+git clone https://github.com/marcivan8/AI-Chatbot.git
+cd AI-Chatbot
+```
+
+Installer le frontend :
+
+```bash
+npm install
+```
+
+Installer le backend :
+
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd ..
+```
+
+### 4.3 Lancer la plateforme
+
+Un script `start.sh` est fourni pour orchestrer le démarrage : il stoppe les processus sur les ports 8000/5173 puis lance Uvicorn (FastAPI) et Vite.
 
 ```bash
 ./start.sh
 ```
 
-Cela va :
-1.  Arrêter tout processus utilisant les ports 8000 ou 5173.
-2.  Démarrer le **Backend FastAPI** sur `http://localhost:8000`.
-3.  Démarrer le **Frontend React** sur `http://localhost:5173`.
+Accéder à l'application : http://localhost:5173
 
 ---
 
-## 📂 Structure du Projet
+## 5. Détails Frontend
 
-```text
-.
-├── backend/                # Backend Python FastAPI
-│   ├── app/                # Logique principale (API, Agent)
-│   ├── models/             # Wrappers Client LLM
-│   ├── tools/              # Outils pour l'Agent (Search, Scraper)
-│   └── data/               # Bases de données JSON (Écoles, Carrières)
-├── src/                    # Code source Frontend React
-│   ├── app/                # Composants fonctionnels (Chatbot, Analytics)
-│   ├── components/         # Composants UI partagés
-│   └── styles/             # CSS Global & config Tailwind
-├── start.sh                # Script de lancement
-└── README.md               # Ce fichier
+### 5.1 Stack Technique
+- Vite + React 18
+- Tailwind CSS v4, Radix UI, Shadcn/UI
+- Framer Motion, Recharts, Lucide
+
+### 5.2 Composants importants
+- `EddyChatbot.jsx` : widget de chat; gère `messages`, `isOpen`, `input`, et appelle l'API.
+- `SchoolCardNew.jsx` : carte réutilisable pour une école.
+- `InsightsView.jsx` : tableau de bord de visualisations (Recharts).
+
+### 5.3 Gestion d'état
+Approche hybride : état local (`useState`) pour UI, Context API pour l'authentification/session si nécessaire.
+
+---
+
+## 6. Détails Backend
+
+### 6.1 Architecture API
+Backend en FastAPI (async), documentation Swagger automatique.
+Endpoints clés :
+- GET /api/v1/schools — recherche filtrée.
+- GET /api/v1/schools/{id} — détail école.
+- POST /api/v1/chat — traitement du message par l'Agent et réponse IA.
+
+### 6.2 Agent (Eddy)
+Agent implémente une boucle ReAct : observation → pensée → action (appel d'outils) → synthèse.
+Principales protections : troncature des entrées >1000 caractères, échappement des balises.
+
+Extrait typique (pseudo) :
+```python
+if len(user_message) > 1000:
+    user_message = user_message[:1000] + "... (truncated)"
+safe_message = user_message.replace("<", "&lt;")
 ```
 
-## 🔒 Sécurité
+### 6.3 Modèles de données
+Pydantic — `School`, `ChatRequest`, `ChatResponse` définis dans `backend/app/schemas.py`.
 
-Ce projet implémente plusieurs bonnes pratiques de sécurité :
--   **Validation des Entrées** : Les entrées utilisateurs sont nettoyées et tronquées.
--   **Garde-fous (Guardrails)** : L'IA suit des politiques d'utilisation strictes via le system prompt.
--   **Sécurité Réseau** : Le web scraper bloque les plages IP privées/locales (protection SSRF).
+### 6.4 Outils disponibles
+- `search_schools` : recherche dans `backend/data/institutions.json`.
+- `scrape_website` : récupération et nettoyage HTML (avec protections SSRF).
+- `search_web` : espace réservé pour intégration API externe.
 
 ---
-*Créé pour le AI Chatbot Bootcamp EPITECH.*
+
+## 7. Sécurité
+
+Principes : défense en profondeur — validations, filtrage, rate limiting.
+
+### 7.1 Injection de Prompt
+- Entrées encapsulées et échappées, troncature des messages trop longs.
+- L'agent traite l'entrée comme données (ex: balises `<user_query>`).
+
+### 7.2 SSRF
+`validate_url` bloque `localhost`, `127.0.0.1`, `::1` et les plages IP privées.
+
+### 7.3 Rate Limiting
+Token Bucket en mémoire — 20 requêtes / minute / IP ; retourne HTTP 429 si dépassé.
+
+### 7.4 CORS
+Seule origine autorisée par défaut : `http://localhost:5173`.
+
+---
+
+## 8. Gestion des Données
+
+### 8.1 Base des établissements
+Fichier principal : `backend/data/institutions.json` (tableau d'objets JSON). Maintenance actuellement manuelle.
+
+### 8.2 Scraper
+`backend/tools/scraper.py` utilise `requests` + `BeautifulSoup`. Timeouts stricts (10s) et User-Agent configurable.
+
+---
+
+## 9. Dépannage & FAQ
+
+- "ModuleNotFoundError" — exécuter depuis la racine ou définir PYTHONPATH ; activez l'environnement virtuel.
+- "Ollama connection refused" — assurez-vous que `ollama serve` tourne.
+- Chatbot en anglais — vérifier le system prompt; reformuler la requête ou recharger le modèle.
+- Ajouter une école — modifier `backend/data/institutions.json` puis redémarrer le backend.
+
+---
+
+## 10. Feuille de Route
+
+- T2 2026 : Migration vers une base vectorielle (Qdrant / pgvector) pour recherche sémantique.
+- T3 2026 : Authentification & comptes (Supabase/NextAuth), historique de chat.
+- T4 2026 : Ingestion de documents (PDF) pour enrichir le RAG.
+
+---
+
+## 11. Licence & Contribution
+
+Projet open-source — PRs et issues bienvenues. Respectez le code de conduite et fournissez des tests pour les changements majeurs.
+
+---
+
+*Ce document (ReadME.final) fusionne le README, la Documentation Complète et le Rapport Technique initials pour produire une documentation unique, structurée et à jour en français.*
