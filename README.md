@@ -62,6 +62,7 @@ Fonctions principales :
 
 2 — Architecture globale
 ------------------------------------
+<img width="211" height="731" alt="télécharger (1)" src="https://github.com/user-attachments/assets/a59b7233-b151-47a7-bc9a-3384cfc1040b" />
 
 2.1 Vue d’ensemble des composants
 
@@ -94,6 +95,7 @@ graph TD
   - Agent injecte observation dans le contexte et réinterpelle LLM.
 - LLM retourne final answer → API renvoie au frontend.
 - Frontend affiche la réponse (support markdown, liens, actions).
+<img width="3870" height="2268" alt="Mermaid-preview (5)" src="https://github.com/user-attachments/assets/88c5a821-4b72-4f1f-a85e-0135efb543d7" />
 
 2.4 Exigences non‑fonctionnelles
 
@@ -188,6 +190,7 @@ function ChatWidget() {
 - InsightsView : graphiques salaires, débouchés (Recharts).
 
 3.4 Communication avec backend
+<img width="4032" height="940" alt="Mermaid-preview (6)" src="https://github.com/user-attachments/assets/1a3d4738-b974-48a7-940f-80a6c1cdd4b1" />
 
 Endpoints principaux :
 - GET /api/v1/schools?query=&filters=
@@ -324,6 +327,7 @@ class ChatResponse(BaseModel):
 MCP (Managed Control Plane) centralise l'exposition des tools à l'agent. Il garantit sécurité, validation d'arguments, quotas, timeouts, logging et whitelisting. Le LLM ne contacte jamais directement des endpoints externes — c'est le MCP qui exécute.
 
 5.2 Tools — contrats & signatures
+<img width="2283" height="2268" alt="Mermaid-preview (7)" src="https://github.com/user-attachments/assets/788d161f-1eb1-4d19-ad88-91ff83a90a11" />
 
 - search_schools(query: str, filters: dict, limit: int = 10) -> List[SchoolSummary]
   - SchoolSummary : { id, name, city, tags, score, snippet }
