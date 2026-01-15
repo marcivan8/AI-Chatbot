@@ -1,9 +1,5 @@
 # EduGuide — Documentation complète 
 
-Version : 1.0.0  
-Date : 2026-01-15  
-Langue : Français
-
 Sommaire
 1. Présentation générale du projet  
 2. Architecture globale  
@@ -13,11 +9,6 @@ Sommaire
 6. Sécurité & gestion des données  
 7. Limites du projet et améliorations (court/moyen terme)  
 8. Conclusion, compétences et liens IA modernes  
-Annexes  
-- A. Extraits de code importants (fichiers réels)  
-- B. Commandes & génération PDF (instructions pandoc)  
-- C. Checklist de revue / QA
-
 ---
 
 Intro rapide : ce document suit exactement le plan que vous avez fourni. Il est pensé pour être imprimé ou exporté en PDF (≈ 25 pages, selon marges/format). Les captures d'écran de code ont été remplacées par des extraits de code (Option A) — texte clair, indexable et prêt à la conversion.
@@ -110,6 +101,13 @@ graph TD
 - Agent : logique ReAct, orchestration tool/LLM.
 - MCP : exécution sécurisée des tools (whitelist, timeouts).
 
+2.6 Flux simplifié
+1. L'utilisateur pose une question → Frontend envoie POST /api/v1/chat (message + history + meta).  
+2. API valide, rate‑limit check → transmet au process_message() de l’Agent.  
+3. Agent construit contexte (system prompt + history + tools description) et appelle le LLM pour décider d'une action.  
+4. Si nécessaire, Agent appelle un ou plusieurs tools via MCP (ex : search_schools).  
+5. Observations retournées sont injectées dans le contexte, LLM synthétise la réponse finale.  
+6. Backend renvoie la réponse au Frontend pour affichage.
 ---
 
 3 — Frontend 
@@ -316,7 +314,32 @@ class ChatResponse(BaseModel):
   - Latence / endpoint
   - nb appels tool / minute
   - taux d’erreur tool
+  - 
+4.7 Gestion d'erreurs LLM / Ollama
+Problèmes observés :
+- Mauvais endpoint (404), timeouts, différences CLI vs HTTP.
 
+Correctifs appliqués :
+- Endpoint unifié `/api/generate`.
+- Timeouts HTTP augmentés (configurable).
+- Fallback automatique si une étape LLM échoue.
+- Exemple de format fallback :
+```json
+{
+  "decision": "TOOL",
+  "tool_name": "get_degree_info",
+  "tool_params": {"level": "Master"},
+  "final_answer": null,
+  "reason": "Fallback: information diplôme"
+}
+```
+L'API doit rester résiliente et ne jamais « casser » en cas de défaillance LLM.
+
+4.7 ReAct vs RAG (comparaison)
+- Multi‑step reasoning : ReAct permet d’enchaîner plusieurs actions/logiques ; RAG est plutôt orienté retrieval + single-shot generation.
+- Outils dynamiques : MCP permet d’ajouter/supprimer outils sans changer le modèle.
+- Latence : JSON local + tools = très faible latence comparé à appels RAG distants.
+- Adaptabilité : ReAct facilite l’ajout de logique métier et de nouvelles sources.
 ---
 
 5 — Serveur MCP & Tooling 
@@ -341,57 +364,114 @@ MCP (Managed Control Plane) centralise l'exposition des tools à l'agent. Il gar
 - scrape_website(url: str, opts: dict) -> { text: str, metadata: dict }
   - Retourne texte nettoyé + métadonnées (title, canonical, lang).
 
-5.3 Sécurité & anti‑SSRF obligatoires
 
-- Bloquer résolutions vers adresses privées (RFC1918), loopback.
-- Résolution DNS puis vérification IP.
-- Timeout écrasant (ex: 5s), taille maximum (ex: 500 KB).
+## 6 - Sécurité & Robustesse
+------------------------------------------
+
+### 6.1 SSRF Protection
+- Bloquer adresses loopback & RFC1918 (127.0.0.1, localhost, 10/8, 172.16/12, 192.168/16).
+- Résolution DNS puis vérification IP avant appel réseau externe.
+- Timeouts (ex: 5–10s) et `max_response_size` (ex: 500 KB).
+- Filtrage et nettoyage HTML (strip scripts, iframes).
 - Strip scripts / iframe / commentaires dangereux.
 - Whitelist domaine configurable (pour certains outils internes).
+  
+### 6.2 Prompt injection & sanitation
+- Troncature messages >1000 caractères.
+- Encapsulation des entrées utilisateur (`<user_query>`) et HTML escaping.
+- Validation stricte des responses tool avant ingestion.
 
-5.4 Logging & audit
-
-- Chaque tool_call : log structuré = { trace_id, tool_name, args (sanitized), start_ts, duration_ms, status }.
-- Audit retention policy : conserver logs X jours, PII redaction.
-
----
-
-6 — Limites & améliorations 
-----------------------------------------
-
-6.1 Limites actuelles
-
-- Données stockées dans un fichier JSON (maintenance manuelle, scalabilité limitée).
-- Pas encore de système d'authentification (users/historiques).
-- LLM local dépend des modèles disponibles (qualité variable).
-- Latence des tool_calls (scraping) peut impacter l'expérience chat.
-
-6.2 Améliorations proposées (court terme)
-
-- Migrer vers DB scalable : Qdrant / pgvector pour recherche sémantique.
-- Ajouter ingestion pipeline (scrapers + validation + enrichissement).
-- Tests d'intégration pour agent avec LLM mocked.
-
-6.3 Améliorations (moyen terme)
-
-- Comptes utilisateurs (auth + historique).
-- IA multi‑agents (scheduler + specialists).
-- Workflows de candidatures (formulaires / envoi / suivi).
-- Monitoring avancé (SLOs, alertes).
+### 6.3 Rate limiting & CORS
+- Token Bucket : 20 req/min/IP pour /api/v1/chat (configurable).
+- CORS par défaut limité à `http://localhost:5173` en développement; liste d'origines autorisées en production.
 
 ---
 
-7 — Conclusion (1 page)
+## 7. Intégration et Pipelines de Données
+
+### 7.1 Institutions
+- Hybrid Import : Main dataset (~245) + Stats (~2854).
+- Normalisation (nom, ville), déduplication, enrichissements manuels importants (ex : Epitech, 42).
+- Maintenance : script d’import + process manuel de validation.
+
+### 7.2 Careers
+- Enrichissements ajoutés : salary (estimates), studyPath (parcours d’études), outlook, keySubjects.
+- CareerService : endpoints pour filtrage, agrégation (GET /api/v1/careers, GET /api/v1/stats).
+
+---
+
+## 8. IA Benchmark & Performance
+
+### 8.1 Résultats synthétiques (exemple)
+| Modèle | Précision FR | Temps moyen |
+|---|---:|---:|
+| Gemma 2 | 100% | 1.76s |
+| Qwen 2.5 | 100% | 4.02s |
+| Mistral | 100% | 5.07s |
+| Llama 3 | 66% | 3.5s |
+
+- Latence des requêtes JSON locales : <50 ms.
+- LLM local réduit coût cloud ; Gemma2 est le meilleur compromis précision/latence dans nos tests.
+
+### 8.2 Observations
+- La qualité des réponses dépend fortement de la qualité et fraîcheur des données locales.
+- Le cache LLM et un cache d’observations tools peuvent amener latence <1s pour réponses fréquentes.
+
+---
+
+## 9. Limites du projet & améliorations
+
+### 9.1 Limites actuelles
+- MVP principalement vitrines : pas de comptes utilisateurs ni candidatures directes.
+- Couverture limitée avant bac (BTS, filières pro).
+- Certaines fiches écoles incomplètes ou obsolètes.
+- Dépendance entre qualité des données et pertinence des recommandations.
+
+### 9.2 Coûts & scalabilité
+- Gemma2 fonctionne sur environ 8 GB RAM (MVP). Plusieurs utilisateurs simultanés augmentent la charge CPU/RAM.
+- Au‑delà de ~100k entrées, passer à une base opérante (Postgres / Mongo / vector DB).
+
+### 9.3 Pistes d’amélioration (court / moyen terme)
+- Comptes utilisateurs & historique des interactions.
+- Candidatures intégrées / workflows de candidature.
+- Extension coverage (lycée, BTS, filières pro).
+- Migration JSON → PostgreSQL / MongoDB / Qdrant pour recherche sémantique.
+- Multi-agent ReAct (specialists) et cache LLM pour latence <1s.
+
+10 — Conclusion 
 -----------------------
 
-Bilan rapide :
-- EduGuide propose une UX moderne, un agent reasoning-based (ReAct) et un backend sécurisé capable d’utiliser des tools.
-- La priorité immédiate est la qualité des données et la migration vers une base vectorielle.
+Impact : EduGuide permet des réponses fiables, contextualisées et interactives, avec liaison établissements ↔ carrières.
 
-Compétences acquises :
-- Conception frontend premium (mobile-first), architecture full‑stack, intégration agent/LLM, sécurisation backend.
+Décisions techniques clés : JSON rapide, Agent ReAct outillé, LLM local, fallback déterministe, sécurité intégrée.
 
-Lien avec IA moderne :
-- Agents reasoning-based, tool usage, grounding des réponses via sources locales/externe.
+Leçons : importance d'une architecture modulaire, multi-step reasoning et séparation frontend/backend pour maintenabilité.
 
+Différenciation : Eddy vs RAG classique → plus précis, capable d’interroger plusieurs sources avant de répondre.
+
+### 10.1 Bilan fonctionnel
+EduGuide répond efficacement à la problématique initiale : manque de visibilité sur parcours et débouchés. La plateforme permet aujourd’hui de :
+- Rechercher et comparer des établissements.  
+- Relier les formations aux métiers correspondants.  
+- Fournir des recommandations contextualisées via Eddy.  
+- Offrir une interface web fluide, intuitive et orientée utilisateur.
+
+### 10.2 Apports techniques et choix structurants
+- Architecture modulaire (Frontend / Backend / Agent / Tools / Data).  
+- Agent IA ReAct outillé, garantissant des réponses fiables et traçables.  
+- Base de données JSON locale, offrant rapidité d’accès et simplicité.  
+- LLM local (Gemma2) pour réduire dépendance cloud.  
+- Fallback déterministe pour haute disponibilité.  
+- Sécurité intégrée (SSRF, rate limiting, prompt injection).
+
+### 10.3 Limites assumées du MVP
+- Pas de comptes utilisateurs, candidatures intégrées, personnalisation avancée.  
+- Données parfois incomplètes ; couverture avant bac partielle.  
+- Scalabilité adaptée au MVP, à améliorer à moyen terme.
+
+### 10.4 Vision d’évolution
+- Élargir le public (collégiens / lycéens).  
+- Ajouter comptes utilisateurs et candidatures directes.  
+- Améliorer performance via cache et multi-agent ReAct.  
+- Migrer vers une base de données robuste pour montée en charge.
 ---
