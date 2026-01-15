@@ -1,4 +1,4 @@
-# EduGuide — Documentation complète (plan suivi)
+# EduGuide — Documentation complète 
 
 Version : 1.0.0  
 Date : 2026-01-15  
