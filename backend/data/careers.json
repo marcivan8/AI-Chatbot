@@ -1,0 +1,782 @@
+[
+    {
+        "id": "1",
+        "name": "Développeur web",
+        "domain": "Informatique",
+        "description": "Le maître d'œuvre du web. Il traduit les besoins clients en lignes de code pour créer des sites fluides et fonctionnels. Un métier de logique et de créativité technique.",
+        "skills": [
+            "JavaScript",
+            "HTML/CSS",
+            "React",
+            "Node.js",
+            "Git"
+        ],
+        "keySubjects": [
+            "Mathématiques",
+            "Logique",
+            "Anglais technique"
+        ],
+        "recommendedLevel": [
+            "Bac+2",
+            "Bac+3",
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "BUT Informatique",
+            "Licence Informatique",
+            "Diplôme d'ingénieur"
+        ],
+        "relatedSchools": [
+            "1",
+            "2",
+            "4",
+            "6",
+            "8"
+        ],
+        "demand": "high",
+        "outlook": "Très favorable",
+        "salary": {
+            "junior": "35k€ - 42k€",
+            "senior": "55k€ - 70k€+"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général (Numérique) ou STI2D"
+            },
+            {
+                "step": "Bac+2/3",
+                "desc": "BUT Info ou Licence"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "Master ou École d'ingénieurs (Optionnel)"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Data Analyst",
+        "domain": "Data",
+        "description": "Le détective de la donnée. Il collecte, traite et fait parler les chiffres pour aider l'entreprise à prendre les bonnes décisions stratégiques.",
+        "skills": [
+            "Python",
+            "SQL",
+            "Excel",
+            "PowerBI",
+            "Statistiques"
+        ],
+        "keySubjects": [
+            "Mathématiques",
+            "Statistiques",
+            "Informatique"
+        ],
+        "recommendedLevel": [
+            "Bac+3",
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "Master Data Science",
+            "École d'ingénieurs",
+            "École de commerce"
+        ],
+        "relatedSchools": [
+            "2",
+            "3",
+            "6",
+            "7"
+        ],
+        "demand": "high",
+        "outlook": "Explosif",
+        "salary": {
+            "junior": "38k€ - 45k€",
+            "senior": "60k€ - 80k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général (Maths expert)"
+            },
+            {
+                "step": "Licence",
+                "desc": "Maths-Info ou Éco-Gestion"
+            },
+            {
+                "step": "Master",
+                "desc": "Data Science ou Business Intelligence"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "name": "Chef de projet IT",
+        "domain": "Informatique",
+        "description": "Le chef d'orchestre numérique. Il coordonne les équipes techniques et fait le lien avec le client pour livrer les projets web dans les temps et le budget.",
+        "skills": [
+            "Gestion de projet",
+            "Agile / Scrum",
+            "Communication",
+            "Jira",
+            "Leadership"
+        ],
+        "keySubjects": [
+            "Management",
+            "Communication",
+            "Culture Web"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "École d'ingénieurs",
+            "Master Management SI"
+        ],
+        "relatedSchools": [
+            "1",
+            "2",
+            "7"
+        ],
+        "demand": "high",
+        "outlook": "Stable",
+        "salary": {
+            "junior": "40k€ - 48k€",
+            "senior": "65k€ - 90k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général"
+            },
+            {
+                "step": "Bac+3",
+                "desc": "Licence Info ou Gestion"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "Master Management de Projet ou École"
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "name": "Consultant en stratégie",
+        "domain": "Conseil",
+        "description": "Le médecin des entreprises. Il analyse les problèmes organisationnels ou stratégiques d'une société et propose des solutions pour améliorer sa performance.",
+        "skills": [
+            "Analyse",
+            "Synthèse",
+            "Business Modeling",
+            "Anglais",
+            "PowerPoint"
+        ],
+        "keySubjects": [
+            "Économie",
+            "Géopolitique",
+            "Mathématiques"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": false,
+        "relatedFormations": [
+            "École de commerce (Top 5)",
+            "Sciences Po",
+            "Grande école d'ingénieurs"
+        ],
+        "relatedSchools": [
+            "3",
+            "5",
+            "7"
+        ],
+        "demand": "medium",
+        "outlook": "Compétitif",
+        "salary": {
+            "junior": "50k€ - 65k€",
+            "senior": "90k€ - 150k€+"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général (excellence)"
+            },
+            {
+                "step": "Prépa",
+                "desc": "CPGE (HEC ou Scientifique)"
+            },
+            {
+                "step": "Grande École",
+                "desc": "Programme Grande École"
+            }
+        ]
+    },
+    {
+        "id": "5",
+        "name": "Ingénieur DevOps",
+        "domain": "Informatique",
+        "description": "Le mécanicien du cloud. Il automatise le déploiement des applications et s'assure que les serveurs sont robustes et sécurisés. Profil très technique.",
+        "skills": [
+            "Docker / K8s",
+            "CI/CD",
+            "AWS / Azure",
+            "Linux",
+            "Python"
+        ],
+        "keySubjects": [
+            "Systèmes & Réseaux",
+            "Programmation",
+            "Anglais"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "École d'ingénieurs",
+            "Master Cloud & Réseaux"
+        ],
+        "relatedSchools": [
+            "1",
+            "2",
+            "4",
+            "6"
+        ],
+        "demand": "high",
+        "outlook": "Très forte pénurie",
+        "salary": {
+            "junior": "42k€ - 50k€",
+            "senior": "70k€ - 95k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Scientifique / STI2D"
+            },
+            {
+                "step": "Bac+2",
+                "desc": "BTS SIO ou DUT Info"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "École d'ingénieurs en alternance"
+            }
+        ]
+    },
+    {
+        "id": "6",
+        "name": "Responsable Marketing Digital",
+        "domain": "Marketing",
+        "description": "La voix de la marque en ligne. Il définit la stratégie pour attirer et fidéliser les clients via les réseaux sociaux, le référencement et la publicité web.",
+        "skills": [
+            "SEO / SEA",
+            "Social Media",
+            "Analytics",
+            "Copywriting",
+            "Stratégie"
+        ],
+        "keySubjects": [
+            "Marketing",
+            "Communication",
+            "Sociologie"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "École de commerce",
+            "Master Marketing Digital",
+            "IAE"
+        ],
+        "relatedSchools": [
+            "3",
+            "7"
+        ],
+        "demand": "medium",
+        "outlook": "Évolutif",
+        "salary": {
+            "junior": "32k€ - 38k€",
+            "senior": "55k€ - 75k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général"
+            },
+            {
+                "step": "Bac+3",
+                "desc": "Bachelor ou Licence Com/Market"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "Master Spécialisé"
+            }
+        ]
+    },
+    {
+        "id": "7",
+        "name": "Architecte Logiciel",
+        "domain": "Informatique",
+        "description": "L'urbaniste du code. Il conçoit la structure globale des logiciels complexes pour garantir qu'ils soient évolutifs, maintenables et performants sur le long terme.",
+        "skills": [
+            "Microservices",
+            "Design Patterns",
+            "Java / C# / Go",
+            "Cloud",
+            "Leadership technique"
+        ],
+        "keySubjects": [
+            "Algorithmique avancée",
+            "Systèmes distribués",
+            "Anglais"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "École d'ingénieurs",
+            "Master Informatique"
+        ],
+        "relatedSchools": [
+            "1",
+            "6",
+            "8"
+        ],
+        "demand": "high",
+        "outlook": "Excellent",
+        "salary": {
+            "junior": "45k€ - 55k€",
+            "senior": "75k€ - 100k€+"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Scientifique / Numérique"
+            },
+            {
+                "step": "Prépa",
+                "desc": "MPSI / PTSI"
+            },
+            {
+                "step": "Grande École",
+                "desc": "Cycle Ingénieur"
+            }
+        ]
+    },
+    {
+        "id": "8",
+        "name": "UX/UI Designer",
+        "domain": "Design",
+        "description": "L'artiste de l'expérience utilisateur. Il imagine des interfaces intuitives et esthétiques (UI) tout en s'assurant que le parcours de l'utilisateur soit simple et efficace (UX).",
+        "skills": [
+            "Figma",
+            "Prototypage",
+            "Psychologie utilisateur",
+            "Design System",
+            "HTML/CSS (bases)"
+        ],
+        "keySubjects": [
+            "Arts appliqués",
+            "Psychologie",
+            "Technologie"
+        ],
+        "recommendedLevel": [
+            "Bac+3",
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "École de Design",
+            "Master Multimédia",
+            "DN MADE"
+        ],
+        "relatedSchools": [
+            "1",
+            "6",
+            "8"
+        ],
+        "demand": "high",
+        "outlook": "Croissant",
+        "salary": {
+            "junior": "30k€ - 38k€",
+            "senior": "50k€ - 70k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "STD2A ou Général"
+            },
+            {
+                "step": "Bac+3",
+                "desc": "Bachelor Design ou DN MADE"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "Master Direction Artistique"
+            }
+        ]
+    },
+    {
+        "id": "9",
+        "name": "Cybersécurité Analyste",
+        "domain": "Informatique",
+        "description": "Le gardien du numérique. Il surveille les réseaux, détecte les intrusions et protège les données sensibles de l'entreprise contre les cyberattaques.",
+        "skills": [
+            "SIEM",
+            "Pentesting",
+            "Réseaux",
+            "Conformité (RGPD)",
+            "Gestion de crise"
+        ],
+        "keySubjects": [
+            "Cryptographie",
+            "Réseaux",
+            "Droit du numérique"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "Master Cybersécurité",
+            "École d'ingénieurs"
+        ],
+        "relatedSchools": [
+            "1",
+            "4",
+            "6",
+            "8"
+        ],
+        "demand": "high",
+        "outlook": "Critique (Pénurie)",
+        "salary": {
+            "junior": "40k€ - 48k€",
+            "senior": "70k€ - 90k€+"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Scientifique / STI2D"
+            },
+            {
+                "step": "Bac+3",
+                "desc": "Licence Pro Sécurité"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "Master Expert Cyber"
+            }
+        ]
+    },
+    {
+        "id": "10",
+        "name": "Ingénieur Agronome",
+        "domain": "Agriculture",
+        "description": "L'expert du vivant. Il conçoit des solutions innovantes pour une agriculture durable, l'alimentation et l'environnement.",
+        "skills": [
+            "Biologie",
+            "Agronomie",
+            "Gestion de projet",
+            "Développement durable",
+            "Génie des procédés"
+        ],
+        "keySubjects": [
+            "SVT",
+            "Physique-Chimie",
+            "Mathématiques"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "Diplôme d'ingénieur agronome",
+            "Master biologie végétale"
+        ],
+        "relatedSchools": [
+            "3",
+            "40",
+            "41"
+        ],
+        "demand": "high",
+        "outlook": "Très Favorable",
+        "salary": {
+            "junior": "32k€ - 38k€",
+            "senior": "50k€ - 72k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général (SVT/Physique) ou STAV"
+            },
+            {
+                "step": "Bac+2",
+                "desc": "Prépa BCPST ou Licence Bio"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "École d'ingénieurs (Cycle 3 ans)"
+            }
+        ]
+    },
+    {
+        "id": "11",
+        "name": "Avocat d'Affaires",
+        "domain": "Droit",
+        "description": "Le stratège juridique. Il conseille les entreprises lors de fusions, acquisitions et contrats complexes pour sécuriser leurs activités.",
+        "skills": [
+            "Droit des sociétés",
+            "Négociation",
+            "Anglais juridique",
+            "Rédaction",
+            "Analyse financière"
+        ],
+        "keySubjects": [
+            "Droit",
+            "Économie",
+            "Anglais"
+        ],
+        "recommendedLevel": [
+            "Bac+6",
+            "Bac+7"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "Master 2 Droit des Affaires",
+            "DJCE",
+            "CAPA (École d'Avocats)"
+        ],
+        "relatedSchools": [
+            "2",
+            "5",
+            "7"
+        ],
+        "demand": "high",
+        "outlook": "Compétitif",
+        "salary": {
+            "junior": "50k€ - 70k€",
+            "senior": "90k€ - 150k€+"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général (Humanités / SES)"
+            },
+            {
+                "step": "Bac+4",
+                "desc": "Master 1 Droit des Affaires"
+            },
+            {
+                "step": "Bac+6",
+                "desc": "CRFPA + École d'Avocats (CAPA)"
+            }
+        ]
+    },
+    {
+        "id": "12",
+        "name": "Médecin Généraliste",
+        "domain": "Santé",
+        "description": "Le pilier de la santé. Il assure le suivi global des patients, diagnostique les pathologies et coordonne les parcours de soins.",
+        "skills": [
+            "Diagnostic",
+            "Écoute active",
+            "Pédagogie",
+            "Sémiologie",
+            "Gestion cabinet"
+        ],
+        "keySubjects": [
+            "SVT",
+            "Chimie",
+            "Empathie"
+        ],
+        "recommendedLevel": [
+            "Bac+9"
+        ],
+        "alternanceAvailable": false,
+        "relatedFormations": [
+            "Diplôme d'État de Docteur en Médecine"
+        ],
+        "relatedSchools": [
+            "2",
+            "20",
+            "21"
+        ],
+        "demand": "high",
+        "outlook": "Pénurie Critique",
+        "salary": {
+            "junior": "50k€ - 70k€",
+            "senior": "80k€ - 120k€+"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général (SVT / Maths / Physique)"
+            },
+            {
+                "step": "Bac+3",
+                "desc": "PASS / LAS (Concours)"
+            },
+            {
+                "step": "Bac+9",
+                "desc": "Internat de Médecine Générale"
+            }
+        ]
+    },
+    {
+        "id": "13",
+        "name": "Contrôleur de Gestion",
+        "domain": "Finance",
+        "description": "Le pilote de la performance. Il analyse les résultats financiers, établit les budgets et aide la direction à optimiser la rentabilité.",
+        "skills": [
+            "Comptabilité",
+            "Excel / VBA",
+            "Analyse de données",
+            "Rigueur",
+            "ERP"
+        ],
+        "keySubjects": [
+            "Mathématiques",
+            "Économie",
+            "Comptabilité"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "Master CCA",
+            "École de commerce (PGE)",
+            "DSCG"
+        ],
+        "relatedSchools": [
+            "3",
+            "7",
+            "30"
+        ],
+        "demand": "medium",
+        "outlook": "Stable",
+        "salary": {
+            "junior": "35k€ - 42k€",
+            "senior": "60k€ - 85k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général ou STMG"
+            },
+            {
+                "step": "Bac+3",
+                "desc": "DCG ou Licence Gestion"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "Master Contrôle de Gestion ou École"
+            }
+        ]
+    },
+    {
+        "id": "14",
+        "name": "Biologiste Chercheur",
+        "domain": "Sciences",
+        "description": "L'explorateur du vivant. Il mène des expériences en laboratoire pour comprendre les mécanismes biologiques et développer de nouvelles thérapies ou produits.",
+        "skills": [
+            "Biologie moléculaire",
+            "Analyses statistiques",
+            "Anglais scientifique",
+            "Rigueur",
+            "Publication"
+        ],
+        "keySubjects": [
+            "SVT",
+            "Chimie",
+            "Anglais"
+        ],
+        "recommendedLevel": [
+            "Bac+8"
+        ],
+        "alternanceAvailable": false,
+        "relatedFormations": [
+            "Doctorat en Sciences de la Vie",
+            "Master Recherche"
+        ],
+        "relatedSchools": [
+            "2",
+            "35",
+            "40"
+        ],
+        "demand": "medium",
+        "outlook": "Compétitif",
+        "salary": {
+            "junior": "32k€ - 38k€",
+            "senior": "55k€ - 80k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général (Scientifique)"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "Master Recherche Biologie"
+            },
+            {
+                "step": "Bac+8",
+                "desc": "Doctorat (Thèse)"
+            }
+        ]
+    },
+    {
+        "id": "15",
+        "name": "Architecte BTP",
+        "domain": "Architecture",
+        "description": "Le bâtisseur créatif. Il dessine les plans des bâtiments, supervise les travaux et garantit la faisabilité technique et esthétique des projets.",
+        "skills": [
+            "AutoCAD / Revit",
+            "Dessin technique",
+            "Gestion de chantier",
+            "Créativité",
+            "Droit de l'urbanisme"
+        ],
+        "keySubjects": [
+            "Arts Plastiques",
+            "Mathématiques",
+            "Physique"
+        ],
+        "recommendedLevel": [
+            "Bac+5"
+        ],
+        "alternanceAvailable": true,
+        "relatedFormations": [
+            "Diplôme d'État d'Architecte (DEA)",
+            "HMONP"
+        ],
+        "relatedSchools": [
+            "1",
+            "60",
+            "61"
+        ],
+        "demand": "medium",
+        "outlook": "Actif",
+        "salary": {
+            "junior": "28k€ - 35k€",
+            "senior": "55k€ - 80k€"
+        },
+        "studyPath": [
+            {
+                "step": "Bac",
+                "desc": "Général ou STD2A"
+            },
+            {
+                "step": "Bac+3",
+                "desc": "Licence Architecture (DEEA)"
+            },
+            {
+                "step": "Bac+5",
+                "desc": "Diplôme d'Architecte (DEA + HMONP)"
+            }
+        ]
+    }
+]
