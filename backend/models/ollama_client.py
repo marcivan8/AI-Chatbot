@@ -10,7 +10,7 @@ load_dotenv()
 class OllamaClient:
     def __init__(self, base_url: str = "http://localhost:11434"):
         self.base_url = base_url
-        self.model = os.getenv("OLLAMA_MODEL", "mistral")
+        self.model = os.getenv("OLLAMA_MODEL", "gemma2")
 
     def generate(self, prompt: str, context: Optional[List[int]] = None) -> Dict:
         """

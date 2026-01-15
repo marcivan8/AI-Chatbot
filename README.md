@@ -1,111 +1,111 @@
-# 🎓 EduGuide - AI-Powered Student Orientation Platform
+# 🎓 EduGuide - Plateforme d'Orientation Étudiante par IA
 
-**EduGuide** is a modern, intelligent platform designed to help students navigate the French higher education landscape. It combines a robust database of institutions/careers with **Eddy**, an empathetic AI assistant powered by local LLMs (Ollama).
-
----
-
-## 🚀 Key Features
-
-### 🤖 AI Orientation Assistant (Eddy)
--   **Natural Language Chat**: Ask questions about schools, careers, or orientation advice.
--   **Contextual RAG**: Eddy uses a "Retrieval Augmented Generation" system to fetch real data from our database and answering accurately.
--   **Web Access**: Can browse the web (securely) to find up-to-date information not in the database.
--   **Security**: Protected against Prompt Injection and SSRF attacks.
-
-### 🏫 School & Career Explorer
--   **Smart Search**: Filter schools by city, type (Engineering, Business, etc.), and domain.
--   **Data Visualization**: Interactive charts showing career outlooks, salaries, and school statistics.
--   **Comparisons**: Compare schools side-by-side.
-
-### 🛡️ Secure & Scalable
--   **Rate Limiting**: Protects API endpoints from abuse.
--   **CORS Protection**:Strictly limits API access to the official frontend.
--   **SSRF Defenses**: Prevents the AI from accessing internal network resources.
+**EduGuide** est une plateforme moderne et intelligente conçue pour aider les étudiants à naviguer dans le paysage de l'enseignement supérieur français. Elle combine une base de données robuste d'établissements et de carrières avec **Eddy**, un assistant IA empathique propulsé par des LLMs locaux (Ollama).
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Fonctionnalités Clés
+
+### 🤖 Assistant d'Orientation IA (Eddy)
+-   **Chat en Langage Naturel** : Posez des questions sur les écoles, les métiers ou obtenez des conseils d'orientation.
+-   **RAG Contextuel** : Eddy utilise un système de "Génération Augmentée par la Récupération" (RAG) pour fournir des réponses précises basées sur nos données réelles.
+-   **Accès Web** : Peut naviguer sur internet (de manière sécurisée) pour trouver des informations récentes absentes de la base de données.
+-   **Sécurité** : Protégé contre les injections de prompt et les attaques SSRF.
+
+### 🏫 Explorateur d'Écoles & Carrières
+-   **Recherche Intelligente** : Filtrez les écoles par ville, type (Ingénieur, Commerce, etc.) et domaine.
+-   **Visualisation de Données** : Graphiques interactifs montrant les perspectives de carrière, les salaires et les statistiques des écoles.
+-   **Comparateur** : Comparez les écoles côte à côte pour faire le meilleur choix.
+
+### 🛡️ Sécurisé & Évolutif
+-   **Limitation de Débit (Rate Limiting)** : Protège l'API contre les abus.
+-   **Protection CORS** : Limite strictement l'accès API au frontend officiel.
+-   **Défenses SSRF** : Empêche l'IA d'accéder aux ressources réseaux internes.
+
+---
+
+## 🛠️ Stack Technique
 
 ### Frontend
--   **Framework**: React 18 + Vite
--   **UI Library**: Tailwind CSS v4 + Radix UI + Shadcn/UI
--   **Visuals**: Recharts (Graphs), Framer Motion (Animations), Lucide (Icons)
+-   **Framework** : React 18 + Vite
+-   **Bibliothèque UI** : Tailwind CSS v4 + Radix UI + Shadcn/UI
+-   **Visuels** : Recharts (Graphiques), Framer Motion (Animations), Lucide (Icônes)
 
 ### Backend
--   **API**: FastAPI (Python 3.9+)
--   **AI Engine**: Ollama (running local models like Mistral or Llama 2/3)
--   **Tools**: BeautifulSoup4 (Scraping), Pydantic (Validation)
--   **Security**: Custom Middleware for Rate Limiting & Input Sanitization
+-   **API** : FastAPI (Python 3.9+)
+-   **Moteur IA** : Ollama (modèles locaux comme Gemma 2 ou Mistral)
+-   **Outils** : BeautifulSoup4 (Scraping), Pydantic (Validation)
+-   **Sécurité** : Middleware personnalisé pour le Rate Limiting & la Sanitization des entrées.
 
 ---
 
-## ⚡ Getting Started
+## ⚡ Pour Commencer
 
-### Prerequisites
+### Prérequis
 1.  **Node.js** (v18+) & **npm/pnpm**
 2.  **Python** (v3.9+)
-3.  **Ollama**: Installed and running.
-    -   Install from [ollama.com](https://ollama.com).
-    -   Pull a model: `ollama pull mistral` (or your preferred model).
+3.  **Ollama** : Installé et démarré.
+    -   Télécharger sur [ollama.com](https://ollama.com).
+    -   Télécharger le modèle : `ollama pull gemma2`.
 
 ### Installation
 
-1.  **Clone the repository**:
+1.  **Cloner le dépôt** :
     ```bash
-    git clone https://github.com/your-repo/eduguide.git
+    git clone https://github.com/votre-repo/eduguide.git
     cd eduguide
     ```
 
-2.  **Install Frontend Dependencies**:
+2.  **Installer les dépendances Frontend** :
     ```bash
     npm install
     ```
 
-3.  **Install Backend Dependencies**:
+3.  **Installer les dépendances Backend** :
     ```bash
     cd backend
     pip install -r requirements.txt
     cd ..
     ```
 
-### 🏃‍♂️ Running the Platform
+### 🏃‍♂️ Lancer la Plateforme
 
-We provide a helper script to start everything at once:
+Nous fournissons un script pour tout démarrer en une fois :
 
 ```bash
 ./start.sh
 ```
 
-This will:
-1.  Kill any processes currently using ports 8000 or 5173.
-2.  Start the **FastAPI Backend** at `http://localhost:8000`.
-3.  Start the **React Frontend** at `http://localhost:5173`.
+Cela va :
+1.  Arrêter tout processus utilisant les ports 8000 ou 5173.
+2.  Démarrer le **Backend FastAPI** sur `http://localhost:8000`.
+3.  Démarrer le **Frontend React** sur `http://localhost:5173`.
 
 ---
 
-## 📂 Project Structure
+## 📂 Structure du Projet
 
 ```text
 .
-├── backend/                # Python FastAPI Backend
-│   ├── app/                # Main application logic (API, Agent)
-│   ├── models/             # LLM Client wrappers
-│   ├── tools/              # Tools for the Agent (Search, Scraper)
-│   └── data/               # JSON Databases (Schools, Careers)
-├── src/                    # React Frontend source
-│   ├── app/                # Feature components (Chatbot, Analytics)
-│   ├── components/         # Shared UI components
-│   └── styles/             # Global CSS & Tailwind config
-├── start.sh                # Launcher script
-└── README.md               # This file
+├── backend/                # Backend Python FastAPI
+│   ├── app/                # Logique principale (API, Agent)
+│   ├── models/             # Wrappers Client LLM
+│   ├── tools/              # Outils pour l'Agent (Search, Scraper)
+│   └── data/               # Bases de données JSON (Écoles, Carrières)
+├── src/                    # Code source Frontend React
+│   ├── app/                # Composants fonctionnels (Chatbot, Analytics)
+│   ├── components/         # Composants UI partagés
+│   └── styles/             # CSS Global & config Tailwind
+├── start.sh                # Script de lancement
+└── README.md               # Ce fichier
 ```
 
-## 🔒 Security
+## 🔒 Sécurité
 
-This project implements several security best practices:
--   **Input Validation**: User inputs are sanitized and truncated.
--   **Output Guardrails**: The AI is instructed via usage policies in the system prompt.
--   **Network Security**: The web scraper blocks private/local IP ranges (SSRF protection).
+Ce projet implémente plusieurs bonnes pratiques de sécurité :
+-   **Validation des Entrées** : Les entrées utilisateurs sont nettoyées et tronquées.
+-   **Garde-fous (Guardrails)** : L'IA suit des politiques d'utilisation strictes via le system prompt.
+-   **Sécurité Réseau** : Le web scraper bloque les plages IP privées/locales (protection SSRF).
 
 ---
-*Created for the AI Chatbot Bootcamp EPITECH.*
+*Créé pour le AI Chatbot Bootcamp EPITECH.*
