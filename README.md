@@ -347,7 +347,7 @@ L'API doit rester résiliente et ne jamais « casser » en cas de défaillance L
 
 5.1 Rôle du MCP
 
-MCP (Managed Control Plane) centralise l'exposition des tools à l'agent. Il garantit sécurité, validation d'arguments, quotas, timeouts, logging et whitelisting. Le LLM ne contacte jamais directement des endpoints externes — c'est le MCP qui exécute.
+MCP (MODEL CONTEXT PROTOCOL) centralise l'exposition des tools à l'agent. Il garantit sécurité, validation d'arguments, quotas, timeouts, logging et whitelisting. Le LLM ne contacte jamais directement des endpoints externes — c'est le MCP qui exécute.
 
 5.2 Tools — contrats & signatures
 <img width="2283" height="2268" alt="Mermaid-preview (7)" src="https://github.com/user-attachments/assets/788d161f-1eb1-4d19-ad88-91ff83a90a11" />
